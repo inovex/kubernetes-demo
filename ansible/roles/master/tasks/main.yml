@@ -1,0 +1,143 @@
+---
+- name: Download kube-apiserver
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernets_version }}/bin/linux/amd64/kube-apiserver
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: not kubernetes_local
+
+- name: Copy kube-apiserver
+  copy:
+    src: kubernetes/kube-apiserver
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: kubernetes_local
+
+- name: Download kube-scheduler
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernets_version }}/bin/linux/amd64/kube-scheduler
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: not kubernetes_local
+
+- name: Copy kube-scheduler
+  copy:
+    src: kubernetes/kube-scheduler
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: kubernetes_local
+
+- name: Download kube-controller-manager
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernets_version }}/bin/linux/amd64/kube-controller-manager
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: not kubernetes_local
+
+- name: Copy kube-controller-manager
+  copy:
+    src: kubernetes/kube-controller-manager
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: kubernetes_local
+
+- name: Download kubectl
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernets_version }}/bin/linux/amd64/kubectl
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: not kubernetes_local
+
+- name: Copy kubectl
+  copy:
+    src: kubernetes/kubectl
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: kubernetes_local
+
+- name: Creates kubernetes directory
+  file:
+    path: /var/lib/kubernetes
+    state: directory
+
+- name: Copy kubernetes cert-file
+  copy:
+    src: ./certs/kubernetes.pem
+    dest: /var/lib/kubernetes/kubernetes.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Copy kubernetes cert-key-file
+  copy:
+    src: ./certs/kubernetes-key.pem
+    dest: /var/lib/kubernetes/kubernetes-key.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Copy kubernetes ca-cert-file
+  copy:
+    src: ./certs/ca.pem
+    dest: /var/lib/kubernetes/ca.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Generate token file
+  template:
+    src: token.csv.j2
+    dest: /var/lib/kubernetes/token.csv
+    owner: root
+    group: root
+
+- name: Generate authorization policy
+  template:
+    src: authorization-policy.jsonl
+    dest: /var/lib/kubernetes/authorization-policy.jsonl
+    owner: root
+    group: root
+
+- name: Generate Kube API Server service file
+  template:
+    src: kube-apiserver.service.j2
+    dest: /etc/systemd/system/kube-apiserver.service
+    owner: root
+    group: root
+
+- name: Start kube-apiserver service
+  systemd:
+    name: kube-apiserver
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: Generate Kube Controller Manager service file
+  template:
+    src: kube-controller-manager.service.j2
+    dest: /etc/systemd/system/kube-controller-manager.service
+    owner: root
+    group: root
+
+- name: Start kube-controller-manager service
+  systemd:
+    name: kube-controller-manager
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: Generate Kube Scheduler service file
+  template:
+    src: kube-scheduler.service.j2
+    dest: /etc/systemd/system/kube-scheduler.service
+    owner: root
+    group: root
+
+- name: Start kube-scheduler service
+  systemd:
+    name: kube-scheduler
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+#kubectl get componentstatuses

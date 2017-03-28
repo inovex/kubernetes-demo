@@ -1,0 +1,80 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-master-claim
+  namespace: todo-app
+  annotations:
+    volume.beta.kubernetes.io/storage-class: quobyte
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-master
+  namespace: todo-app
+  labels:
+    name: redis-master
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: redis-master
+      namespace: todo-app
+      labels:
+        name: redis-master
+    spec:
+      containers:
+        - name: "redis-master"
+          image: "redis:3.0"
+          command:
+            - /bin/bash
+            - -xec
+            - |
+              if [ "$(ls -A /var/lib/redis)"]; then
+                  # restore AOF
+                  redis-check-aof --fix
+              fi
+
+              redis-server /usr/local/etc/redis/redis.conf
+          resources:
+            limits:
+              cpu: 100m
+            requests:
+              cpu: 100m
+          ports:
+            - containerPort: 6379
+              protocol: "TCP"
+          volumeMounts:
+            - name: "redis-conf"
+              mountPath: "/usr/local/etc/redis/"
+            - name: "redis-data"
+              mountPath: "/var/lib/redis"
+          livenessProbe:
+              exec:
+                command:
+                  - /bin/bash
+                  - -xec
+                  - |
+                    redis-cli ping
+        - name: "prometheus-exporter"
+          image: "oliver006/redis_exporter:v0.10.7"
+          resources:
+            limits:
+              cpu: 100m
+            requests:
+              cpu: 100m
+          ports:
+            - containerPort: 9121
+              protocol: "TCP"
+      volumes:
+        - name: redis-conf
+          configMap:
+            name: redis-master
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-master-claim

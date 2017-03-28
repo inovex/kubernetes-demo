@@ -1,0 +1,1378 @@
+{
+  "dashboard": {
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 1,
+    "hideControls": false,
+    "id": null,
+    "links": [],
+    "refresh": false,
+    "rows": [
+      {
+        "collapse": false,
+        "height": 140,
+        "panels": [
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(50, 172, 45, 0.97)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(245, 54, 54, 0.9)"
+            ],
+            "datasource": "K8s-Prom",
+            "format": "percentunit",
+            "gauge": {
+              "maxValue": 1,
+              "minValue": 0,
+              "show": true,
+              "thresholdLabels": false,
+              "thresholdMarkers": false
+            },
+            "id": 10,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": true,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true
+            },
+            "targets": [
+              {
+                "expr": "quantile(0.9,rate(_osd:storage:busy_time[1m])) / 1000",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "metric": "_osd:storage:busy_time",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "thresholds": "0.3,0.8",
+            "title": "90th percentile Spindle Utilization",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(50, 172, 45, 0.97)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(245, 54, 54, 0.9)"
+            ],
+            "datasource": "K8s-Prom",
+            "format": "percentunit",
+            "gauge": {
+              "maxValue": 1,
+              "minValue": 0,
+              "show": true,
+              "thresholdLabels": false,
+              "thresholdMarkers": false
+            },
+            "id": 12,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": true,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true
+            },
+            "targets": [
+              {
+                "expr": "quantile(0.99,rate(_osd:storage:busy_time[1m])) / 1000",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "metric": "_osd:storage:busy_time",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "thresholds": "0.3,0.8",
+            "title": "99th percentile Spindle Utilization",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": "K8s-Prom",
+            "format": "percentunit",
+            "gauge": {
+              "maxValue": 1,
+              "minValue": 0,
+              "show": true,
+              "thresholdLabels": false,
+              "thresholdMarkers": false
+            },
+            "id": 11,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": true,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true
+            },
+            "targets": [
+              {
+                "expr": "sum(_device:usage) / sum(_device:capacity)",
+                "intervalFactor": 2,
+                "metric": "_device:usage",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "thresholds": "30,80",
+            "title": "Disk Usage",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 236,
+        "panels": [
+          {
+            "aliasColors": {
+              "max": "#C15C17"
+            },
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 9,
+            "legend": {
+              "alignAsTable": false,
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 1,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "$hostname",
+                "yaxis": 1
+              }
+            ],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "quantile(0.5, rate(_osd:storage:busy_time[1m])) / 1000",
+                "intervalFactor": 2,
+                "legendFormat": "50th quantile",
+                "metric": "_osd:storage:busy_time",
+                "refId": "C",
+                "step": 2
+              },
+              {
+                "expr": "quantile(0.9, rate(_osd:storage:busy_time[1m])) / 1000",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "90th quantile",
+                "refId": "A",
+                "step": 2
+              },
+              {
+                "expr": "quantile(0.99, rate(_osd:storage:busy_time[1m])) / 1000",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "99th quantile",
+                "metric": "",
+                "refId": "B",
+                "step": 2
+              },
+              {
+                "expr": "quantile(0.999, rate(_osd:storage:busy_time[1m])) / 1000",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "99,9th quantile",
+                "metric": "",
+                "refId": "D",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Spindle utilization / disk busy time",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "percentunit",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {
+              "max": "#C15C17"
+            },
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 1,
+            "legend": {
+              "alignAsTable": false,
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 1,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "$hostname",
+                "yaxis": 1
+              }
+            ],
+            "span": 6,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(rate(_osd:storage:read_operations[5m]))",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "read",
+                "metric": "_osd:storage:read_operations",
+                "refId": "C",
+                "step": 2
+              },
+              {
+                "expr": "sum(rate(_osd:storage:write_operations[5m]))",
+                "intervalFactor": 2,
+                "legendFormat": "write",
+                "refId": "A",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "IOPS",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "iops",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 210,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 5,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": true,
+              "show": false,
+              "sort": "max",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(rate(_osd:storage:data_read[5m])) by (hostname)",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "metric": "_osd:storage:data_read",
+                "refId": "A",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Data read per second",
+            "tooltip": {
+              "shared": true,
+              "sort": 2,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 7,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": true,
+              "show": false,
+              "sort": "max",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(rate(_osd:storage:data_written[5m])) by (hostname)",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "metric": "_osd:storage:data_read",
+                "refId": "A",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Data written per second",
+            "tooltip": {
+              "shared": true,
+              "sort": 2,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 258,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 6,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.5, sum(rate(_osd:read:latency_bucket[5m])) by (le))",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "50th quantile",
+                "metric": "latency",
+                "refId": "B",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.7, sum(rate(_osd:read:latency_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "70th quantile",
+                "metric": "",
+                "refId": "A",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.90, sum(rate(_osd:read:latency_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "90th quantile",
+                "refId": "D",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.99, sum(rate(_osd:read:latency_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "99th quantile",
+                "refId": "C",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.999, sum(rate(_osd:read:latency_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "99,9th quantile",
+                "refId": "E",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Storage Read latency",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 8,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.5, sum(rate(_osd:write:latency_bucket[5m])) by (le))",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "50th quantile",
+                "metric": "latency",
+                "refId": "B",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.7, sum(rate(_osd:write:latency_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "70th quantile",
+                "metric": "",
+                "refId": "A",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.9, sum(rate(_osd:write:latency_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "90th quantile",
+                "refId": "C",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.99, sum(rate(_osd:write:latency_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "99th quantile",
+                "refId": "D",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.999, sum(rate(_osd:write:latency_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "99,9th quantile",
+                "refId": "E",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Storage Write latency",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 2,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(rate(_osd:storage:data_read_scrub[5m]))",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "scrub read",
+                "metric": "scru",
+                "refId": "A",
+                "step": 2
+              },
+              {
+                "expr": "sum(rate(_osd:storage:data_read_maintenance[5m]))",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "maintenance read",
+                "metric": "mainten",
+                "refId": "B",
+                "step": 2
+              },
+              {
+                "expr": "sum(rate(_osd:storage:data_written_maintenance[5m]))",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "maintenance written ",
+                "metric": "maintenan",
+                "refId": "C",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Scrub data read",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 13,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(_rpc_server:current_blocked_connections)",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "blocked connections",
+                "metric": "",
+                "refId": "A",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Blocked connections",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 14,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": true,
+              "rightSide": true,
+              "show": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(rate(_osd:storage:device_write_latency_sum[5m]) / rate(_osd:storage:device_write_latency_count[5m])) by (hostname)",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{hostname}}  average write latency ",
+                "metric": "latency",
+                "refId": "B",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Storage Write latency",
+            "tooltip": {
+              "shared": true,
+              "sort": 2,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 252,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 15,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.5, sum(rate(_rpc_bucket[5m])) by (le))",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "50th quantile",
+                "metric": "latency",
+                "refId": "B",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.7, sum(rate(_rpc_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "70th quantile",
+                "metric": "",
+                "refId": "A",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.90, sum(rate(_rpc_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "90th quantile",
+                "refId": "D",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.99, sum(rate(_rpc_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "99th quantile",
+                "refId": "C",
+                "step": 2
+              },
+              {
+                "expr": "histogram_quantile(0.999, sum(rate(_rpc_bucket[5m])) by (le))",
+                "hide": false,
+                "intervalFactor": 2,
+                "legendFormat": "99,9th quantile",
+                "refId": "E",
+                "step": 2
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "RPC latency",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 246,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": true,
+            "datasource": "K8s-Prom",
+            "fill": 1,
+            "id": 4,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": false,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "_osd:storage:corrupted_objects",
+                "interval": "",
+                "intervalFactor": 10,
+                "legendFormat": "",
+                "metric": "_osd:storage:corrupted_objects",
+                "refId": "A",
+                "step": 10
+              },
+              {
+                "expr": "sum(_osd:storage:corrupted_on_disk_data)",
+                "intervalFactor": 10,
+                "legendFormat": "corrupted on disk data",
+                "metric": "_osd:storage:corrupted_on_disk_data",
+                "refId": "B",
+                "step": 10
+              },
+              {
+                "expr": "sum(rate(_osd:request_metadata:crc_errors[5m]))",
+                "intervalFactor": 10,
+                "legendFormat": "crc error rate",
+                "metric": "_osd:request_metadata:crc_errors",
+                "refId": "C",
+                "step": 10
+              },
+              {
+                "expr": "",
+                "hide": false,
+                "intervalFactor": 2,
+                "metric": "",
+                "refId": "D"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Data corruption",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      }
+    ],
+    "schemaVersion": 14,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "Quobyte",
+    "version": 19
+  }
+}

@@ -1,0 +1,73 @@
+---
+- name:  Download etcd
+  unarchive:
+    src: "https://github.com/coreos/etcd/releases/download/{{ etcd_version }}/etcd-{{ etcd_version }}-linux-amd64.tar.gz"
+    dest: "/tmp"
+    copy: no
+    mode: u=rwx,g=rx,o=rx
+    validate_certs: no
+
+- name: Copy etcd binaries
+  copy:
+    src: /tmp/etcd-{{ etcd_version }}-linux-amd64/etcd
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    remote_src: true
+    mode: u=rwx,g=rx,o=rx
+
+- name: Copy etcd binaries
+  copy:
+    src: /tmp/etcd-{{ etcd_version }}-linux-amd64/etcdctl
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    remote_src: true
+    mode: u=rwx,g=rx,o=rx
+
+- name: Creates etcd directory
+  file:
+    path: /etc/etcd
+    state: directory
+
+- name: Copy etcd cert-file
+  copy:
+    src: ./certs/kubernetes.pem
+    dest: /etc/etcd/kubernetes.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Copy etcd cert-key-file
+  copy:
+    src: ./certs/kubernetes-key.pem
+    dest: /etc/etcd/kubernetes-key.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Copy etcd ca-cert-file
+  copy:
+    src: ./certs/ca.pem
+    dest: /etc/etcd/ca.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Init etcd.service file
+  template:
+    src: etcd.service.j2
+    dest: /etc/systemd/system/etcd.service
+    owner: root
+    group: root
+
+- name: Start etcd service
+  systemd:
+    name: etcd
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: Init flannel in etcd
+  command: "/usr/local/bin/etcdctl --endpoint=https://{{ etcd_host }}:2379 --ca-file=/etc/etcd/ca.pem set /coreos.com/network/config '{\"Network\": \"{{ flannel_subnet }}\", \"Backend\": {\"Type\": \"vxlan\"}}'"
+  when: flannel

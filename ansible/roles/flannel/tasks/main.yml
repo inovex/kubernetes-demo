@@ -1,0 +1,57 @@
+---
+- name:  Download flannel
+  unarchive:
+    src: "https://github.com/coreos/flannel/releases/download/{{ flannel_version }}/flannel-{{ flannel_version }}-linux-amd64.tar.gz"
+    dest: "/usr/local/bin"
+    copy: no
+    mode: u=rwx,g=rx,o=rx
+    validate_certs: no
+  when: flannel
+
+- name: Creates kubernetes directory
+  file:
+    path: /var/lib/kubernetes
+    state: directory
+  when: flannel
+
+- name: Copy kubernetes cert-file
+  copy:
+    src: ./certs/kubernetes.pem
+    dest: /var/lib/kubernetes/kubernetes.pem
+    owner: root
+    group: root
+    force: true
+  when: flannel
+
+- name: Copy kubernetes cert-key-file
+  copy:
+    src: ./certs/kubernetes-key.pem
+    dest: /var/lib/kubernetes/kubernetes-key.pem
+    owner: root
+    group: root
+    force: true
+  when: flannel
+
+- name: Copy kubernetes ca-cert-file
+  copy:
+    src: ./certs/ca.pem
+    dest: /var/lib/kubernetes/ca.pem
+    owner: root
+    group: root
+    force: true
+  when: flannel
+
+- template:
+    src: flanneld.service.j2
+    dest: /etc/systemd/system/flanneld.service
+    owner: root
+    group: root
+  when: flannel
+
+- name: Start flanneld service
+  systemd:
+    name: flanneld
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  when: flannel

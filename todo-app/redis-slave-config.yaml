@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-slave
+  namespace: todo-app
+data:
+  redis.conf: |-
+    # Redis configuration file example.
+    port 6379
+    slaveof redis-master 6379

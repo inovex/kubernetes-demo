@@ -1,0 +1,27 @@
+{
+  "CN": "kubernetes",
+  "hosts": [
+    "master",
+    "node0",
+    "node1",
+    "node2",
+    "10.0.0.1",
+    "10.0.0.10",
+    "127.0.0.1",
+    "kubernetes.default.svc.cluster.local",
+    "kubernetes"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "DE",
+      "L": "Germany",
+      "O": "Kubernetes",
+      "OU": "BaWu",
+      "ST": "BaWu"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+---
+- name: docker
+  yum_repository:
+    name: dockerrepo
+    description: "Docker Repository"
+    baseurl: https://yum.dockerproject.org/repo/main/centos/7/
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: https://yum.dockerproject.org/gpg
+  when: ansible_os_family == "RedHat"
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
+  when: ansible_os_family == "RedHat"
+
+- name: install the latest version of Docker
+  yum:
+    name: docker-engine-1.12.6-1.el7.centos
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: install socat
+  yum:
+    name: ntp
+    state: latest
+  when: ansible_os_family == "RedHat"
+
+- name:
+  template:
+    src: docker.service.j2
+    dest: /etc/systemd/system/docker.service
+    owner: root
+    group: root
+
+- name: Start docker service
+  systemd:
+    name: docker
+    state: restarted
+    daemon_reload: yes
+    enabled: yes

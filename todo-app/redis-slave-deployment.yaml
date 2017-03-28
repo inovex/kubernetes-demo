@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-slave
+  namespace: todo-app
+  labels:
+    name: redis-slave
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: redis-slave
+      namespace: todo-app
+      labels:
+        name: redis-slave
+    spec:
+      containers:
+        - name: "slave"
+          image: "redis:3.0"
+          command: 
+            - /bin/bash
+            - -xec
+            - |
+              redis-server /usr/local/etc/redis/redis.conf
+          resources:
+            limits:
+              cpu: 100m
+            requests:
+              cpu: 100m
+          ports:
+            - containerPort: 6379
+              protocol: "TCP"
+          volumeMounts:
+            - name: "redis-conf"
+              mountPath: "/usr/local/etc/redis/"
+          livenessProbe:
+              exec:
+                command:
+                  - /bin/bash
+                  - -xec
+                  - |
+                    redis-cli ping
+      volumes:
+        - name: redis-conf
+          configMap:
+            name: redis-slave

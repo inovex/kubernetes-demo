@@ -1,0 +1,17 @@
+---
+- name: Install Kubernetes master and etcd
+  hosts: kubernetes-master
+  become: yes
+  become_method: sudo
+  roles:
+    - etcd
+    - master
+
+- name: Install Kubernetes Nodes with flannel, docker and kubernetes
+  hosts: kubernetes-nodes
+  become: yes
+  become_method: sudo
+  roles:
+    - flannel
+    - docker
+    - node

@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-alertmanager
+  namespace: monitoring
+data:
+  config.yml: |-
+    global:
+      # The smarthost and SMTP sender used for mail notifications.
+      smtp_smarthost: 'localhost:25'
+      smtp_from: 'alertmanager@example.org'
+
+    # The root route on which each incoming alert enters.
+    route:
+      # The root route must not have any matchers as it is the entry point for
+      # all alerts. It needs to have a receiver configured so alerts that do not
+      # match any of the sub-routes are sent to someone.
+      receiver: 'team-X-mails'
+
+    receivers:
+    - name: 'team-X-mails'
+      email_configs:
+      - to: 'team-X+alerts@example.org'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: prometheus-alertmanager
+  name: prometheus-alertmanager
+  namespace: monitoring
+spec:
+  selector:
+    app: prometheus-alertmanager
+  ports:
+  - name: prometheus
+    protocol: TCP
+    port: 9093
+    targetPort: 9093
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: prometheus-alertmanager
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-alertmanager
+  template:
+    metadata:
+      name: prometheus-alertmanager
+      labels:
+        app: prometheus-alertmanager
+      namespace: monitoring
+    spec:
+      volumes:
+      - name: config-volume
+        configMap:
+          name: prometheus-alertmanager
+      containers:
+      - name: prometheus-alertmanager
+        image: prom/alertmanager:v0.5.0
+        args:
+          - '-config.file=/etc/alertmanager/config.yml'
+        ports:
+        - name: web
+          containerPort: 9093
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/alertmanager

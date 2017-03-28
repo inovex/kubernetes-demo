@@ -1,0 +1,14 @@
+[Unit]
+Requires=flanneld.service
+After=network.target flanneld.service
+
+[Service]
+EnvironmentFile=/run/flannel/subnet.env
+ExecStart=
+ExecStart=/usr/bin/docker daemon \
+  --bip=${FLANNEL_SUBNET} \
+  --mtu=${FLANNEL_MTU} \
+  --storage-driver=overlay \
+  --host=unix:///var/run/docker.sock
+Restart=on-failure
+RestartSec=5

@@ -1,0 +1,16 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: "todo-app"
+  namespace: todo-app
+  annotations:
+    prometheus.io/scrape: 'true'
+  labels:
+    name: "todo-app"
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: "TCP"
+  selector:
+    name: "todo-app"

@@ -1,0 +1,114 @@
+---
+- name: Download kube-proxy
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernets_version }}/bin/linux/amd64/kube-proxy
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+    validate_certs: no
+  when: not kubernetes_local
+
+- name: Copy kube-proxy
+  copy:
+    src: kubernetes/kube-proxy
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: kubernetes_local
+
+- name: Download kubelet
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernets_version }}/bin/linux/amd64/kubelet
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+    validate_certs: no
+  when: not kubernetes_local
+
+- name: Copy kubelet
+  copy:
+    src: kubernetes/kubelet
+    dest: /usr/bin/
+    mode: u=rwx,g=r,o=r
+  when: kubernetes_local
+
+- name: install socat
+  yum:
+    name: socat
+    state: latest
+
+- name: Creates kubelet directory
+  file:
+    path: /var/lib/kubelet
+    state: directory
+
+- name: Creates kubernetes directory
+  file:
+    path: /var/lib/kubernetes
+    state: directory
+
+- name: Copy kubernetes cert-file
+  copy:
+    src: ./certs/kubernetes.pem
+    dest: /var/lib/kubernetes/kubernetes.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Copy kubernetes cert-key-file
+  copy:
+    src: ./certs/kubernetes-key.pem
+    dest: /var/lib/kubernetes/kubernetes-key.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Copy kubernetes ca-cert-file
+  copy:
+    src: ./certs/ca.pem
+    dest: /var/lib/kubernetes/ca.pem
+    owner: root
+    group: root
+    force: true
+
+- name: Generate Kubelet config
+  template:
+    src: kubeconfig.j2
+    dest: /var/lib/kubelet/kubeconfig
+    owner: root
+    group: root
+
+- name: Generate Kube Proxy service file
+  template:
+    src: kube-proxy.service.j2
+    dest: /etc/systemd/system/kube-proxy.service
+    owner: root
+    group: root
+
+- name: Generate Kubelet service file
+  template:
+    src: kubelet.service.j2
+    dest: /etc/systemd/system/kubelet.service
+    owner: root
+    group: root
+
+- name: Start kube-proxy service
+  systemd:
+    name: kube-proxy
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: Start kubelet service
+  systemd:
+    name: kubelet
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: install the latest version of ntp
+  yum:
+    name: ntp
+    state: latest
+
+- name: restart ntpd
+  systemd:
+    state: restarted
+    name: ntpd

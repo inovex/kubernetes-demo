@@ -1,0 +1,5 @@
+[kubernetes-master]
+panel3
+
+[kubernetes-nodes]
+panel[4:8]

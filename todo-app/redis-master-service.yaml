@@ -1,0 +1,22 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: "redis-master"
+  namespace: todo-app
+  labels:
+    name: "redis-master"
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9121"
+spec:
+  ports:
+    - port: 6379
+      name: "redis-master"
+      targetPort: 6379
+      protocol: "TCP"
+    - port: 9121
+      name: "monitoring"
+      targetPort: 9121
+      protocol: "TCP"
+  selector:
+    name: "redis-master"
