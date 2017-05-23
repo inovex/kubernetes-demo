@@ -209,6 +209,11 @@ resource "aws_instance" "node" {
   private_ip = "10.241.0.${count.index + 4}"
   source_dest_check = false
 
+  root_block_device {
+    volume_size           = "50"
+    delete_on_termination = true
+  }
+
   tags {
     Name = "Node"
     User = "${var.user}"
