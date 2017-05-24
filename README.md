@@ -11,7 +11,17 @@
 ## Provision cluster
 
 ### AWS
+#### Create a route53 domain for your cluster
+(taken from https://kubernetes.io/docs/getting-started-guides/kops/)
+You can, and probably should, use subdomains to divide your clusters. As our example we will use useast1.dev.example.com. The API server endpoint will then be api.useast1.dev.example.com.
+A Route53 hosted zone can serve subdomains. Your hosted zone could be useast1.dev.example.com, but also dev.example.com or even example.com. kops works with any of these, so typically you choose for organization reasons (e.g. you are allowed to create records under dev.example.com, but not under example.com).
+Let’s assume you’re using dev.example.com as your hosted zone. You create that hosted zone using the normal process, or with a command such as aws route53 create-hosted-zone --name dev.example.com --caller-reference 1.
+You must then set up your NS records in the parent domain, so that records in the domain will resolve. Here, you would create NS records in example.com for dev. If it is a root domain name you would configure the NS records at your domain registrar (e.g. example.com would need to be configured where you bought example.com).
+This step is easy to mess up (it is the #1 cause of problems!) You can double-check that your cluster is configured correctly if you have the dig tool by running:
+dig NS dev.example.com
+You should see the 4 NS records that Route53 assigned your hosted zone.
 
+#### Starting up the demo
 Terraform is installed and configured with an AWS account. (using `~/.aws/credentials` is sufficient)
 
 $ Set AWS variables in
